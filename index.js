@@ -86,6 +86,14 @@ app.post('/slack-eiw', function (req, res) {
     if (action && action == 'project'){
         q_project(req, res);
     } else if (action && action.length > 0) {
+        return res.json({
+            speech: "ZZS",
+            displayText: "speech",
+            source: 'webhook-eiw-demo',
+            data: {
+                "slack": slack_message
+            }
+        });
         q_quick_response(req, res);
     } else {
         return res.json({
