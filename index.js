@@ -90,7 +90,7 @@ function q_quick_response(req,res) {
         } else {
             if (result.rowCount > 0) {
                 var slack_message = {
-                    "text": result.rows[0].title,
+                    "title": result.rows[0].title,
                     "attachments": [{
                         "fields": [{ 
                             "value": result.rows[0].solution_descr.split('\\n').join('\n'), 
