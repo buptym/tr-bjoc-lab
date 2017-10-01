@@ -123,6 +123,7 @@ function q_quick_response(req,res) {
                         {"title": "pic5", "image_url": result.rows[0].thumb_url5}
                     );
                 }
+                
                 if (result.rows[0].thread1) {
                     slack_message.attachments.push(
                         {
@@ -140,10 +141,10 @@ function q_quick_response(req,res) {
                             }]
                         }
                     );
-                }
-                if (result.rows[0].thread2) {
-                    slack_message.attachments.actions.push(
-                        {
+                    var attach_amount = slack_message.attachments.length;
+                    
+                    if (result.rows[0].thread2) {
+                        slack_message.attachments[attach_amount].actions.push({
                             "name": "question",
                             "text": result.rows[0].thread2,
                             "type": "button",
@@ -153,12 +154,10 @@ function q_quick_response(req,res) {
                                 "text":  result.rows[0].thread2_answer.split('\\n').join('\n'),
                                 "dismiss_text": "OK"
                             }
-                        }
-                    );
-                }
-                if (result.rows[0].thread3) {
-                    slack_message.attachments.actions.push(
-                        {
+                        });
+                    }
+                    if (result.rows[0].thread3) {
+                        slack_message.attachments[attach_amount].actions.push({
                             "name": "question",
                             "text": result.rows[0].thread3,
                             "type": "button",
@@ -168,8 +167,8 @@ function q_quick_response(req,res) {
                                 "text":  result.rows[0].thread3_answer.split('\\n').join('\n'),
                                 "dismiss_text": "OK"
                             }
-                        }
-                    );
+                        });
+                    }
                 }
                 
                 return res.json({
