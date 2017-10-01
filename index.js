@@ -91,7 +91,7 @@ function q_quick_response(req,res) {
         } else {
             if (result.rowCount > 0) {
                 var slack_message = {
-                    "text": result.rows[0].solution_descr,
+                    "text": result.rows[0].action,
                     "attachments": [{
                         "action": result.rows[0].action,
                         "solution_descr": result.rows[0].solution_descr,
@@ -103,7 +103,7 @@ function q_quick_response(req,res) {
                     }]
                 };
                 return res.json({
-                    speech: result.rows[0].action,
+                    speech: result.rows[0].solution_descr,
                     displayText: "speech",
                     source: 'webhook-eiw-demo',
                     data: {
