@@ -133,9 +133,9 @@ function q_quick_response(req,res) {
                             "value": result.rows[0].solution_descr, 
                             "short": "false" 
                         }],
-                        "thumb_url": result.rows[0].thumb_url1
+                        "thumb_url": "https://i.imgur.com/Xy7oAKh.png"
                     }, {
-                        "thumb_url": result.rows[0].thumb_url1
+                        "thumb_url": "https://i.imgur.com/Xy7oAKh.png"
                     }, {
                         "thumb_url": result.rows[0].thumb_url2
                     }, {
