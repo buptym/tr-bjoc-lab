@@ -56,7 +56,7 @@ app.post('/slack-eiw', function (req, res) {
 
     if (action && action == 'project'){
         q_project(req, res);
-    } else if (action && action.length > 0) {
+    } else if (action && action.length > 1) {
         q_quick_response(req, res);
     } else {
         return res.json({
@@ -74,6 +74,10 @@ function q_quick_response(req,res) {
     var client = get_pg_client();
     var err = {};
     var action = req.body.result.action;
+	
+	return res.json({
+            speech: action.length,
+        });
 
     client.connect(function (err) {
         if (err) {
@@ -92,7 +96,6 @@ function q_quick_response(req,res) {
                 var slack_message = {    
                     "attachments": [{
                         "title": result.rows[0].title,
-			"test": action.length,
                         "fields": [{ 
                             "value": result.rows[0].solution_descr.split('\\n').join('\n'), 
                             "short": "false" 
