@@ -119,15 +119,22 @@ function q_quick_response(req,res) {
         } else {
             if (result.rowCount > 0) {
                 var slack_message = {
-                    "text": result.rows[0].solution_descr,
+                    "text": result.rows[0].title,
                     "attachments": [{
-                        "action": result.rows[0].action,
-                        "solution_descr": result.rows[0].solution_descr,
-                        "thumb_url1": result.rows[0].thumb_url1,
-                        "thumb_url2": result.rows[0].thumb_url2,
-                        "thumb_url3": result.rows[0].thumb_url3,
-                        "thumb_url4": result.rows[0].thumb_url4,
-                        "thumb_url5": result.rows[0].thumb_url5
+                        "fields": [{ 
+                            "value": result.rows[0].solution_descr, 
+                            "short": "false" 
+                        }],
+                    }, {
+                        "thumb_url": result.rows[0].thumb_url1
+                    }, {
+                        "thumb_url": result.rows[0].thumb_url2
+                    }, {
+                        "thumb_url": result.rows[0].thumb_url3
+                    }, {
+                        "thumb_url": result.rows[0].thumb_url4
+                    }, {
+                        "thumb_url": result.rows[0].thumb_url5
                     }]
                 };
                 return res.json({
