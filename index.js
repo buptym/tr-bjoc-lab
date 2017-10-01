@@ -91,7 +91,7 @@ function q_quick_response(req,res) {
         } else {
             if (result.rowCount > 0) {
                 var slack_message = {
-                    "text": result.rows[0].action,
+                    "text": result.rows[0].solution_descr,
                     "attachments": [{
                         "action": result.rows[0].action,
                         "solution_descr": result.rows[0].solution_descr,
