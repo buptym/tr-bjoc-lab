@@ -133,17 +133,11 @@ function q_quick_response(req,res) {
                                 "text": result.rows[0].thread1,
                                 "type": "button",
                                 "value": result.rows[0].thread1,
-                                "confirm": {
-                                    "title": result.rows[0].thread1,
-                                    "text":  result.rows[0].thread1_answer.split('\\n').join('\n'),
-                                    "dismiss_text": "OK"
-                                },
-                                "test": slack_message.attachments.length
+                                "msg_action": result.rows[0].title,
+                                "test": slack_message.attachments[slack_message.attachments.length].title
                             }]
                         }
-                    );
-                    var attach_amount = slack_message.attachments.length;
-                    
+                    );                    
                 }
                 
                 return res.json({
