@@ -38,6 +38,8 @@ app.post('/dbcmd', function (req, res) {
     dbh.query(db_cmd, function (err, result) {
         res.send(result);
     });
+    
+    dbh.disconnect()
 
 });
 //Test Echo
@@ -63,6 +65,8 @@ app.post('/slack-eiw', function (req, res) {
         q_company(req, res);
     } else if (action && action == 'q_project' && req.body.result.parameters.Project) {
         q_project(req, res);
+    } else if (action && action == 'q_stamp_duty' && req.body.result.parameters.Location) {
+        q_stamp_duty(req,res);
     } else {
         return res.json({
             speech: "ZZS",
@@ -74,6 +78,61 @@ app.post('/slack-eiw', function (req, res) {
         });
     }
 });
+
+function q_stamp_duty(req,res) {
+    var client = get_pg_client();
+    var err = {};
+    var _location = "-";
+
+    if (req.body.result.parameters.Location) {
+        _location = req.body.result.parameters.Location;
+    }
+
+    client.connect(function (err) {
+        if (err) {
+            console.log(err);
+            res.json(err);
+        }
+    });
+
+    console.log("DB connected~~!")
+
+    client.query('SELECT * FROM stamp_duty where location like \'%' + _location + '%\'', function (err, result) {
+        if (err) {
+            return res.json(err);
+        } else {
+            if (result.rowCount > 0) {
+                var slack_message = {
+                    "text": result.rows[0].full_name,
+                    "attachments": [{
+                        "location": result.rows[0].location,
+                        "solution_descr1": result.rows[0].solution_descr1,
+                        "solution_descr2": result.rows[0].solution_descr2,
+                        "solution_descr3": result.rows[0].solution_descr3,
+                        "solution_descr4": result.rows[0].solution_descr4,
+                        "solution_descr5": result.rows[0].solution_descr5,
+                        "thumb_url1": result.rows[0].thumb_url1,
+                        "thumb_url2": result.rows[0].thumb_url2,
+                        "thumb_url3": result.rows[0].thumb_url3,
+                        "thumb_url4": result.rows[0].thumb_url4,
+                        "thumb_url5": result.rows[0].thumb_url5
+                    }]
+                };
+                return res.json({
+                    speech: result.rows[0].title,
+                    displayText: "speech",
+                    source: 'webhook-eiw-demo',
+                    data: {
+                        "slack": slack_message
+                    }
+                });
+            } else {
+                return res.json({});
+            };
+        }
+    });
+    client.disconnect()
+}
 
 //Demo purpose hardcoded, not save in DB
 function q_project(req, res) {
