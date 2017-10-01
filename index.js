@@ -74,7 +74,7 @@ app.post('/slack-eiw', function (req, res) {
 function q_quick_response(req,res) {
     var client = get_pg_client();
     var err = {};
-    var _action = req.body.result.action;
+    var action = req.body.result.action;
 
     client.connect(function (err) {
         if (err) {
@@ -85,7 +85,7 @@ function q_quick_response(req,res) {
 
     console.log("DB connected~~!")
 
-    client.query('SELECT * FROM quick_response where action like \'%' + _action + '%\'', function (err, result) {
+    client.query('SELECT * FROM quick_response where action like \'%' + action + '%\'', function (err, result) {
         if (err) {
             return res.json(err);
         } else {
@@ -107,7 +107,7 @@ function q_quick_response(req,res) {
                     }]
                 };
                 return res.json({
-                    speech: result.rows[0].title,
+                    speech: result.rows[0].action,
                     displayText: "speech",
                     source: 'webhook-eiw-demo',
                     data: {
@@ -119,7 +119,6 @@ function q_quick_response(req,res) {
             };
         }
     });
-    client.disconnect()
 }
 
 //Demo purpose hardcoded, not save in DB
