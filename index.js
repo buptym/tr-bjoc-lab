@@ -57,11 +57,12 @@ app.post('/slack-eiw', function (req, res) {
     if (action && action == 'project'){
         q_project(req, res);
     } else if (action && action.length > 1) {
- 	return res.json({
+        q_quick_response(req, res);
+    } 
+	return res.json({
             "speech": "lal1a"
         });
-        q_quick_response(req, res);
-    } else {
+	else {
 	return res.json({
             "speech": "lala"
         });
