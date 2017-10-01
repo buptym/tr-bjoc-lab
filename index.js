@@ -144,34 +144,30 @@ function q_quick_response(req,res) {
                 if (result.rows[0].thread2) {
                     slack_message.attachments.actions.push(
                         {
-                            "actions": [{
-                                "name": "question",
-                                "text": result.rows[0].thread2,
-                                "type": "button",
-                                "value": result.rows[0].thread2,
-                                "confirm": {
-                                    "title": result.rows[0].thread2,
-                                    "text":  result.rows[0].thread2_answer.split('\\n').join('\n'),
-                                    "dismiss_text": "OK"
-                                }
-                            }]
+                            "name": "question",
+                            "text": result.rows[0].thread2,
+                            "type": "button",
+                            "value": result.rows[0].thread2,
+                            "confirm": {
+                                "title": result.rows[0].thread2,
+                                "text":  result.rows[0].thread2_answer.split('\\n').join('\n'),
+                                "dismiss_text": "OK"
+                            }
                         }
                     );
                 }
                 if (result.rows[0].thread3) {
                     slack_message.attachments.actions.push(
                         {
-                            "actions": [{
-                                "name": "question",
-                                "text": result.rows[0].thread3,
-                                "type": "button",
-                                "value": result.rows[0].thread3,
-                                "confirm": {
-                                    "title": result.rows[0].thread3,
-                                    "text":  result.rows[0].thread3_answer.split('\\n').join('\n'),
-                                    "dismiss_text": "OK"
-                                }
-                            }]
+                            "name": "question",
+                            "text": result.rows[0].thread3,
+                            "type": "button",
+                            "value": result.rows[0].thread3,
+                            "confirm": {
+                                "title": result.rows[0].thread3,
+                                "text":  result.rows[0].thread3_answer.split('\\n').join('\n'),
+                                "dismiss_text": "OK"
+                            }
                         }
                     );
                 }
