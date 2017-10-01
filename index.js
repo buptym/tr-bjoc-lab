@@ -122,14 +122,36 @@ function q_quick_response(req,res) {
                     "text": result.rows[0].title,
                     "attachments": [{
                         "fields": [{ 
-                            "value": result.rows[0].solution_descr.replace("\\n", "\n"), 
+                            "value": formatDescr(result.rows[0].solution_descr), 
                             "short": "false" 
                         }]
-                    },{
-                        "title": "pic1",
-                        "image_url": "https://i.imgur.com/K31AAnp.png"
                     }]
                 };
+                if (result.rows[0].thumb_url1) {
+                    slack_message.attachments.push(
+                        {"title": "pic1", "image_url": result.rows[0].thumb_url1}
+                    );
+                }
+                if (result.rows[0].thumb_url2) {
+                    slack_message.attachments.push(
+                        {"title": "pic2", "image_url": result.rows[0].thumb_url2}
+                    );
+                }
+                if (result.rows[0].thumb_url3) {
+                    slack_message.attachments.push(
+                        {"title": "pic3", "image_url": result.rows[0].thumb_url3}
+                    );
+                }
+                if (result.rows[0].thumb_url4) {
+                    slack_message.attachments.push(
+                        {"title": "pic4", "image_url": result.rows[0].thumb_url4}
+                    );
+                }
+                if (result.rows[0].thumb_url5) {
+                    slack_message.attachments.push(
+                        {"title": "pic5", "image_url": result.rows[0].thumb_url5}
+                    );
+                }
                 
                 return res.json({
                     speech: result.rows[0].solution_descr,
@@ -331,6 +353,15 @@ function bimbqm() {
     }
 }
 
+function formatDescr(str) {
+    var descr = replaceAll(str, "\\n", "\n");
+    descr = replaceAll(descr, "\\t", "\t");
+    return descr;
+}
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
 
 function get_pg_client() {
     var pg = require('pg');
@@ -344,3 +375,5 @@ function get_pg_client() {
 app.listen((process.env.PORT || 8000), function () {
     console.log("Server up and listening");
 });
+
+
