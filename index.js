@@ -133,8 +133,7 @@ function q_quick_response(req,res) {
                                 "text": result.rows[0].thread1,
                                 "type": "button",
                                 "value": result.rows[0].thread1,
-                                "msg_action": result.rows[0].title,
-                                "test": slack_message.attachments[slack_message.attachments.length].title
+                                "msg_action": result.rows[0].title
                             }]
                         }
                     );                    
