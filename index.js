@@ -60,10 +60,10 @@ app.post('/slack-eiw', function (req, res) {
         q_quick_response(req, res);
     } else {
         return res.json({
-            speech: "ZZS",
-            displayText: "speech",
-            source: 'webhook-eiw-demo',
-            data: {
+            "speech": "ZZS",
+            "displayText": "speech",
+            "source": 'webhook-eiw-demo',
+            "data": {
                 "slack": slack_message
             }
         });
@@ -76,7 +76,7 @@ function q_quick_response(req,res) {
     var action = req.body.result.action;
 	
 	return res.json({
-            speech: action.length,
+            "speech": action.length
         });
 
     client.connect(function (err) {
