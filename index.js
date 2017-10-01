@@ -134,7 +134,7 @@ function q_quick_response(req,res) {
                                 "value": result.rows[0].thread1,
                                 "confirm": {
                                     "title": result.rows[0].thread1,
-                                    "text":  result.rows[0].thread1_answer,
+                                    "text":  result.rows[0].thread1_answer.split('\\n').join('\n'),
                                     "dismiss_text": "OK"
                                 }
                             }]
@@ -151,7 +151,7 @@ function q_quick_response(req,res) {
                                 "value": result.rows[0].thread2,
                                 "confirm": {
                                     "title": result.rows[0].thread2,
-                                    "text":  result.rows[0].thread2_answer,
+                                    "text":  result.rows[0].thread2_answer.split('\\n').join('\n'),
                                     "dismiss_text": "OK"
                                 }
                             }]
@@ -168,7 +168,7 @@ function q_quick_response(req,res) {
                                 "value": result.rows[0].thread3,
                                 "confirm": {
                                     "title": result.rows[0].thread3,
-                                    "text":  result.rows[0].thread3_answer,
+                                    "text":  result.rows[0].thread3_answer.split('\\n').join('\n'),
                                     "dismiss_text": "OK"
                                 }
                             }]
