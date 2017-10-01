@@ -126,7 +126,7 @@ function q_quick_response(req,res) {
                 if (result.rows[0].thread1) {
                     slack_message.attachments.push(
                         {
-                            "text": "If you want to know:",
+                            "title": "If you want to know:",
                             "actions": [{
                                 "name": "question",
                                 "text": result.rows[0].thread1,
@@ -135,8 +135,41 @@ function q_quick_response(req,res) {
                                 "confirm": {
                                     "title": result.rows[0].thread1,
                                     "text":  result.rows[0].thread1_answer,
-                                    "ok_text": "No",
-                                    "dismiss_text": "No"
+                                    "dismiss_text": "OK"
+                                }
+                            }]
+                        }
+                    );
+                }
+                if (result.rows[0].thread2) {
+                    slack_message.attachments.actions.push(
+                        {
+                            "actions": [{
+                                "name": "question",
+                                "text": result.rows[0].thread2,
+                                "type": "button",
+                                "value": result.rows[0].thread2,
+                                "confirm": {
+                                    "title": result.rows[0].thread2,
+                                    "text":  result.rows[0].thread2_answer,
+                                    "dismiss_text": "OK"
+                                }
+                            }]
+                        }
+                    );
+                }
+                if (result.rows[0].thread3) {
+                    slack_message.attachments.actions.push(
+                        {
+                            "actions": [{
+                                "name": "question",
+                                "text": result.rows[0].thread3,
+                                "type": "button",
+                                "value": result.rows[0].thread3,
+                                "confirm": {
+                                    "title": result.rows[0].thread3,
+                                    "text":  result.rows[0].thread3_answer,
+                                    "dismiss_text": "OK"
                                 }
                             }]
                         }
