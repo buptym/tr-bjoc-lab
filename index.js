@@ -57,7 +57,9 @@ app.post('/slack-eiw', function (req, res) {
 
     var slack_message = welcome();
 
-    if (action) {
+    if (action && action == 'project'){
+        q_project(req, res);
+    } else if (action) {
         q_quick_response(req, res);
     } else {
         return res.json({
