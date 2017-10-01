@@ -56,16 +56,9 @@ app.post('/slack-eiw', function (req, res) {
 
     if (action && action == 'project'){
         q_project(req, res);
-    } else if (action && action.length > 1) {
+    } else if (action && action.length > 0) {
         q_quick_response(req, res);
-    } 
-	return res.json({
-            "speech": "lal1a"
-        });
-	else {
-	return res.json({
-            "speech": "lala"
-        });
+    } else {
         return res.json({
             "speech": "ZZS",
             "displayText": "speech",
@@ -81,10 +74,6 @@ function q_quick_response(req,res) {
     var client = get_pg_client();
     var err = {};
     var action = req.body.result.action;
-	
-	return res.json({
-            "speech": action.length
-        });
 
     client.connect(function (err) {
         if (err) {
