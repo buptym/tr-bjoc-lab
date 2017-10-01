@@ -122,7 +122,7 @@ function q_quick_response(req,res) {
                     "text": result.rows[0].title,
                     "attachments": [{
                         "fields": [{ 
-                            "value": formatDescr(result.rows[0].solution_descr), 
+                            "value": result.rows[0].solution_descr.replace(new RegExp('\\n', 'g'), '\n'), 
                             "short": "false" 
                         }]
                     }]
