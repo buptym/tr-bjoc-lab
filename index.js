@@ -57,14 +57,8 @@ app.post('/slack-eiw', function (req, res) {
 
     var slack_message = welcome();
 
-    if (action && action == 'q_people' && req.body.result.parameters.Name) {
-        q_people(req, res);
-    } else if (action && action == 'q_company' && req.body.result.parameters.Company) {
-        q_company(req, res);
-    } else if (action && action == 'q_project' && req.body.result.parameters.Project) {
-        q_project(req, res);
-    } else if (action && action == 'q_stamp_duty' && req.body.result.parameters.Location) {
-        q_stamp_duty(req,res);
+    if (action && req.body.result.parameters.Action) {
+        q_quick_response(req, res);
     } else {
         return res.json({
             speech: "ZZS",
@@ -77,13 +71,13 @@ app.post('/slack-eiw', function (req, res) {
     }
 });
 
-function q_stamp_duty(req,res) {
+function q_quick_response(req,res) {
     var client = get_pg_client();
     var err = {};
-    var _location = "-";
+    var _action = "-";
 
-    if (req.body.result.parameters.Location) {
-        _location = req.body.result.parameters.Location;
+    if (req.body.result.parameters.Action) {
+        _action = req.body.result.parameters.Action;
     }
 
     client.connect(function (err) {
@@ -95,15 +89,15 @@ function q_stamp_duty(req,res) {
 
     console.log("DB connected~~!")
 
-    client.query('SELECT * FROM stamp_duty where location like \'%' + _location + '%\'', function (err, result) {
+    client.query('SELECT * FROM quick_response where action like \'%' + _action + '%\'', function (err, result) {
         if (err) {
             return res.json(err);
         } else {
             if (result.rowCount > 0) {
                 var slack_message = {
-                    "text": result.rows[0].full_name,
+                    "text": result.rows[0].action,
                     "attachments": [{
-                        "location": result.rows[0].location,
+                        "location": result.rows[0].action,
                         "solution_descr1": result.rows[0].solution_descr1,
                         "solution_descr2": result.rows[0].solution_descr2,
                         "solution_descr3": result.rows[0].solution_descr3,
