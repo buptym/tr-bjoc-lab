@@ -92,7 +92,6 @@ function q_quick_response(req,res) {
                 var slack_message = {    
                     "attachments": [{
                         "title": result.rows[0].title,
-			"callback_id": result.rows[0].title,
                         "fields": [{ 
                             "value": result.rows[0].solution_descr.split('\\n').join('\n'), 
                             "short": "false" 
@@ -134,8 +133,8 @@ function q_quick_response(req,res) {
                                 "text": result.rows[0].thread1,
                                 "type": "button",
                                 "value": result.rows[0].thread1,
-				"fallback": result.rows[0].title,
-                                "callback_id": result.rows[0].title
+				"callback_id": "button_tutorial",
+				"fallback": "https://troi-chatbot.herokuapp.com/slack-eiw/"
                             }]
                         }
                     );                    
