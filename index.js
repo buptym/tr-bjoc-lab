@@ -89,9 +89,9 @@ function q_quick_response(req,res) {
             return res.json(err);
         } else {
             if (result.rowCount > 0) {
-                var slack_message = {
-                    "title": result.rows[0].title,
+                var slack_message = {    
                     "attachments": [{
+                        "title": result.rows[0].title,
                         "fields": [{ 
                             "value": result.rows[0].solution_descr.split('\\n').join('\n'), 
                             "short": "false" 
