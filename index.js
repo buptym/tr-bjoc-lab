@@ -122,22 +122,36 @@ function q_quick_response(req,res) {
                     "text": result.rows[0].title,
                     "attachments": [{
                         "fields": [{ 
-                            "value": result.rows[0].solution_descr, 
+                            "value": result.rows[0].solution_descr.replace("\\n", "\n"), 
                             "short": "false" 
-                        }],
-                        "thumb_url": "https://i.imgur.com/Xy7oAKh.png"
-                    }, {
-                        "thumb_url": "https://i.imgur.com/Xy7oAKh.png"
-                    }, {
-                        "thumb_url": result.rows[0].thumb_url2
-                    }, {
-                        "thumb_url": result.rows[0].thumb_url3
-                    }, {
-                        "thumb_url": result.rows[0].thumb_url4
-                    }, {
-                        "thumb_url": result.rows[0].thumb_url5
+                        }]
                     }]
                 };
+                if (result.rows[0].thumb_url1) {
+                    slack_message.attachments.fields.push(
+                        {"value": "pic1", "image_url": result.rows[0].thumb_url1}
+                    );
+                }
+                if (result.rows[0].thumb_url2) {
+                    slack_message.attachments.fields.push(
+                        {"value": "pic2", "image_url": result.rows[0].thumb_url2}
+                    );
+                }
+                if (result.rows[0].thumb_url3) {
+                    slack_message.attachments.fields.push(
+                        {"value": "pic3", "image_url": result.rows[0].thumb_url3}
+                    );
+                }
+                if (result.rows[0].thumb_url4) {
+                    slack_message.attachments.fields.push(
+                        {"value": "pic4", "image_url": result.rows[0].thumb_url4}
+                    );
+                }
+                if (result.rows[0].thumb_url5) {
+                    slack_message.attachments.fields.push(
+                        {"value": "pic5", "image_url": result.rows[0].thumb_url5}
+                    );
+                }
                 return res.json({
                     speech: result.rows[0].solution_descr,
                     displayText: "speech",
