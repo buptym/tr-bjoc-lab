@@ -39,8 +39,6 @@ app.post('/dbcmd', function (req, res) {
         res.send(result);
     });
     
-    dbh.disconnect()
-
 });
 //Test Echo
 app.post('/echo', function (req, res) {
