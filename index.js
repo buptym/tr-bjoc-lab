@@ -57,7 +57,7 @@ app.post('/slack-eiw', function (req, res) {
 
     var slack_message = welcome();
 
-    if (action && req.body.result.parameters.Action) {
+    if (action && req.body.result.Action) {
         q_quick_response(req, res);
     } else {
         return res.json({
@@ -77,7 +77,7 @@ function q_quick_response(req,res) {
     var _action = "-";
 
     if (req.body.result.parameters.Action) {
-        _action = req.body.result.parameters.Action;
+        _action = req.body.result.Action;
     }
 
     client.connect(function (err) {
