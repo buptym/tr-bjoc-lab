@@ -91,14 +91,10 @@ function q_quick_response(req,res) {
         } else {
             if (result.rowCount > 0) {
                 var slack_message = {
-                    "text": result.rows[0].action,
+                    "text": result.rows[0].solution_descr,
                     "attachments": [{
-                        "location": result.rows[0].action,
-                        "solution_descr1": result.rows[0].solution_descr1,
-                        "solution_descr2": result.rows[0].solution_descr2,
-                        "solution_descr3": result.rows[0].solution_descr3,
-                        "solution_descr4": result.rows[0].solution_descr4,
-                        "solution_descr5": result.rows[0].solution_descr5,
+                        "action": result.rows[0].action,
+                        "solution_descr": result.rows[0].solution_descr,
                         "thumb_url1": result.rows[0].thumb_url1,
                         "thumb_url2": result.rows[0].thumb_url2,
                         "thumb_url3": result.rows[0].thumb_url3,
