@@ -354,8 +354,8 @@ function bimbqm() {
 }
 
 function formatDescr(str) {
-    var descr = replaceAll(str, "\\n", "\n");
-    descr = replaceAll(descr, "\\t", "\t");
+    var descr = replaceAll(str, '\\n', '\n');
+    descr = replaceAll(descr, '\\t', '\t');
     return descr;
 }
 
