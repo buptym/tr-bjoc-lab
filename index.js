@@ -123,6 +123,25 @@ function q_quick_response(req,res) {
                         {"title": "pic5", "image_url": result.rows[0].thumb_url5}
                     );
                 }
+                if (result.rows[0].thread1) {
+                    slack_message.attachments.push(
+                        {
+                            "text": "If you want to know:",
+                            "actions": [{
+                                "name": "question",
+                                "text": result.rows[0].thread1,
+                                "type": "button",
+                                "value": result.rows[0].thread1,
+                                "confirm": {
+                                    "title": result.rows[0].thread1,
+                                    "text":  result.rows[0].thread1_answer,
+                                    "ok_text": "No",
+                                    "dismiss_text": "No"
+                                }
+                            }]
+                        }
+                    );
+                }
                 
                 return res.json({
                     speech: result.rows[0].solution_descr,
