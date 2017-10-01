@@ -134,6 +134,7 @@ function q_quick_response(req,res) {
                                 "text": result.rows[0].thread1,
                                 "type": "button",
                                 "value": result.rows[0].thread1,
+				"fallback": result.rows[0].title,
                                 "callback_id": result.rows[0].title
                             }]
                         }
