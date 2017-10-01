@@ -57,7 +57,7 @@ app.post('/slack-eiw', function (req, res) {
 
     var slack_message = welcome();
 
-    if (action && req.body.result.Action) {
+    if (action) {
         q_quick_response(req, res);
     } else {
         return res.json({
@@ -74,11 +74,7 @@ app.post('/slack-eiw', function (req, res) {
 function q_quick_response(req,res) {
     var client = get_pg_client();
     var err = {};
-    var _action = "-";
-
-    if (req.body.result.parameters.Action) {
-        _action = req.body.result.Action;
-    }
+    var _action = req.body.result.action;
 
     client.connect(function (err) {
         if (err) {
