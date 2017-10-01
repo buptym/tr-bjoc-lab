@@ -35,9 +35,35 @@ app.post('/dbcmd', function (req, res) {
         }
     });
 
-    dbh.query(db_cmd, function (err, result) {
-        res.send(result);
-    });
+    if(db_cmd == '_initial_'){
+        var db_cmd1 = 'insert into quick_response(action, solution_descr, thumb_url1, thumb_url2) values (\'HK_stamp_duty\', \' \
+Stamp duty with Y/N flag is used to indicate whether a security is subject to a stamp duty (a tax placed on legal documents upon transfer). \
+For securities listed on HKEX, most ordinary shares and company warrant are stamp duty eligible but with a few exceptions. While all derivative warrants, CBBC, ETFs, L&I products and most debt are not subject to stamp duty. \
+ \
+For EIKON users, kindly refer to the Security Miscellaneous Information page, which is <stock code> + <MI> + <.HK> for stamp duty information, e.g. <0001MI.HK>. Alternatively, you can check FID8999 (TAX_ELIGBL), with Y for stamp duty eligible and N for stamp duty ineligible. \
+ \
+Example of Miscellaneous Information page: \
+(please see pic1) \
+For DataScope Users, kindly be note Stamp Duty information only available for the main RIC, that is <stock code> + <.HK>/<.HZ>/<.HS>,e.g. <0001.HK>, but not applicable for the alias RIC, e.g. <stock code> + <stat.HK>, e.g. <0001stat.HK>. \
+ \
+Besides, you can refer the HKEX website for the full list of securities that not subject to stamp duty: \
+http://www.HKEX.com.hk/eng/market/sec_tradinfo/secstpduty.htm  \
+(please see pic2) \
+ \
+If need further assistance \
+Your case will be directing to specific content team, kindly be note office hour is from 01:00-10:00GMT. \
+\', \'https://i.imgur.com/Xy7oAKh.png\', \'https://i.imgur.com/K31AAnp.png\')';
+        dbh.query(db_cmd1, function (err, result) {
+            res.send(result);
+        });
+
+
+    } else {
+        dbh.query(db_cmd, function (err, result) {
+            res.send(result);
+        });
+    }
+    
     
 });
 //Test Echo
