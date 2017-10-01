@@ -92,6 +92,7 @@ function q_quick_response(req,res) {
                 var slack_message = {    
                     "attachments": [{
                         "title": result.rows[0].title,
+                        "callback_id": result.rows[0].title,
                         "fields": [{ 
                             "value": result.rows[0].solution_descr.split('\\n').join('\n'), 
                             "short": "false" 
@@ -133,7 +134,7 @@ function q_quick_response(req,res) {
                                 "text": result.rows[0].thread1,
                                 "type": "button",
                                 "value": result.rows[0].thread1,
-                                "callback_id": result.rows[0].title
+                                "callback_id": "result.rows[0].title"
                             }]
                         }
                     );                    
@@ -153,6 +154,10 @@ function q_quick_response(req,res) {
         }
     });
 }
+
+slackMessages.action('wopr_game', (payload) => {
+		console.log(payload);
+	});
 
 //Demo purpose hardcoded, not save in DB
 function q_project(req, res) {
