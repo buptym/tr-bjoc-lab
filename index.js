@@ -95,8 +95,14 @@ function q_quick_response(req,res) {
             return res.json(err);
         } else {
             if (result.rowCount > 0) {
+				var message;
+				if(result.rows[0].title) {
+					message = "*" + result.rows[0].title + "* \n" + result.rows[0].solution_descr.split('\\n').join('\n');
+				} else {
+					message = result.rows[0].solution_descr.split('\\n').join('\n');
+				}
                 var slack_message = {    
-					"text": "*" + result.rows[0].title + "* \n" + result.rows[0].solution_descr.split('\\n').join('\n'),
+					"text": message,
                     "attachments": [{
                     }]
                 };
