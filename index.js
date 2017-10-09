@@ -96,9 +96,8 @@ function q_quick_response(req,res) {
         } else {
             if (result.rowCount > 0) {
                 var slack_message = {    
+					"text": "*" + result.rows[0].title + "* \n" + result.rows[0].solution_descr.split('\\n').join('\n'),
                     "attachments": [{
-                        "title": result.rows[0].title,
-                        "text": result.rows[0].solution_descr.split('\\n').join('\n')
                     }]
                 };
                 if (result.rows[0].thumb_url1) {
