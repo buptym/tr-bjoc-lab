@@ -2,7 +2,10 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const bodyParser = require('body-parser');
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -29,11 +32,13 @@ app.post('/dbcmd', function (req, res) {
     dbh.connect(function (err) {
         if (err) {
             console.log(err.message);
+	    	dbh.end();
             res.send(err.message)
         }
     });
 
     dbh.query(req.body.db_cmd, function (err, result) {
+		dbh.end();
         res.send(result);
     });
 });
@@ -92,10 +97,7 @@ function q_quick_response(req,res) {
                 var slack_message = {    
                     "attachments": [{
                         "title": result.rows[0].title,
-                        "fields": [{ 
-                            "value": result.rows[0].solution_descr.split('\\n').join('\n'), 
-                            "short": "false" 
-                        }]
+                        "text": "value": result.rows[0].solution_descr.split('\\n').join('\n')
                     }]
                 };
                 if (result.rows[0].thumb_url1) {
