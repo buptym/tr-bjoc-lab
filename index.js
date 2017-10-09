@@ -5,6 +5,8 @@ const path = require('path');
 
 const bodyParser = require('body-parser');
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -31,11 +33,13 @@ app.post('/dbcmd', function (req, res) {
     dbh.connect(function (err) {
         if (err) {
             console.log(err.message);
+			dbh.end();
             res.send(err.message)
         }
     });
 
     dbh.query(req.body.db_cmd, function (err, result) {
+		dbh.end();
         res.send(result);
     });
 });
