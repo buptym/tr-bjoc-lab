@@ -94,7 +94,7 @@ function q_quick_response(req,res) {
                 var slack_message = {    
                     "attachments": [{
                         "title": result.rows[0].title,
-                        "text": "value": result.rows[0].solution_descr.split('\\n').join('\n')
+                        "text": result.rows[0].solution_descr.split('\\n').join('\n')
                     }]
                 };
                 if (result.rows[0].thumb_url1) {
