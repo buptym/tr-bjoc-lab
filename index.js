@@ -58,8 +58,6 @@ app.post('/slack-eiw', function (req, res) {
 
     var action = req.body.result.action;
 
-    var slack_message = welcome();
-
     if (action && action == 'project'){
         q_project(req, res);
     } else if (action && action.length > 0) {
@@ -91,6 +89,7 @@ function q_quick_response(req,res) {
     console.log("DB connected~~!")
 
     client.query('SELECT * FROM quick_response where action like \'%' + action + '%\'', function (err, result) {
+		client.end();
         if (err) {
             return res.json(err);
         } else {
